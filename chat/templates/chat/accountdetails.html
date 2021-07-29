@@ -1,0 +1,88 @@
+{% extends 'chat/base.html' %}
+
+
+{% block content %}
+<title>Account Details</title>
+	{% comment %} NAVBAR START {% endcomment %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" disabled>ChatScape</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="margin-right:40px;">Home</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'find' %}" style="margin-right:40px;">Find People</a>
+        </li>
+		<li class="nav-item">
+          <a class="btn btn-outline-warning nav-link active" aria-current="page" href="{% url 'chat' %}" style="margin-right:40px;">Chat</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+        </li>
+		
+        </ul>
+    </div>
+  </div>
+</nav> 
+{% comment %} NAVBAR ENDS HERE {% endcomment %}
+
+
+{% comment %} ACCOUNT DETAILS START HERE {% endcomment %}
+<br><br><br>
+<center>
+{% for detail in accountdetail %}
+	<h4>{{detail.username}}'s details</h4>
+{% endfor %}
+<br><br><br>
+<center>
+<div class="container">
+	{% for detail in accountdetail %}
+  			<div class="row" style="margin-bottom:20px;">
+    			<div class="col border border-dark">
+      				<b>Username</b>
+    			</div>
+    			<div class="col border border-dark">
+      				{{ detail.username }}
+    			</div>
+    		</div>
+			<div class="row" style="margin-bottom:20px;">
+    			<div class="col border border-dark">
+      				<b>First Name</b>
+    			</div>
+    			<div class="col border border-dark">
+      				{{ detail.firstname }}
+    			</div>
+    		</div>
+			<div class="row" style="margin-bottom:20px;">
+    			<div class="col border border-dark">
+      				<b>Last Name</b>
+    			</div>
+    			<div class="col border border-dark">
+      				{{ detail.lastname }}
+    			</div>
+    		</div>
+			<div class="row" style="margin-bottom:20px;">
+    			<div class="col border border-dark">
+      				<b>Email</b>
+    			</div>
+    			<div class="col border border-dark">
+      				{{ detail.email }}
+    			</div>
+    		</div>
+			<div class="row" style="margin-bottom:20px;">
+    			<div class="col border border-dark">
+      				<b>Date of Birth</b>
+    			</div>
+    			<div class="col border border-dark">
+      				{{ detail.date_of_birth }}
+    			</div>
+    		</div>
+	{% endfor %}
+</div>
+</center>
+{% endblock %}

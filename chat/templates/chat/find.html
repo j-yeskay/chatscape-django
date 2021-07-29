@@ -1,0 +1,69 @@
+{% extends 'chat/base.html' %}
+
+
+{% block content %}
+<title>Find People</title>
+{% comment %} NAVBAR START {% endcomment %}
+	<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <div class="container-fluid">
+    <a class="navbar-brand" disabled>ChatScape</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'home' %}" style="margin-right:40px;">Home</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'find' %}" style="margin-right:40px;">Find People</a>
+        </li>
+		<li class="nav-item">
+          <a class="btn btn-outline-warning nav-link active" aria-current="page" href="{% url 'chat' %}" style="margin-right:40px;">Chat</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'logout' %}">Logout</a>
+        </li>
+		
+        </ul>
+    </div>
+  </div>
+</nav> 
+{% comment %} NAVBAR ENDS HERE {% endcomment %}
+
+<br><br><br>
+<center>
+<form method="GET" class="form-group">
+		<input name="q" type="text" placeholder="Search by username" class="form-control">
+		<br>
+		<button type="submit" class="btn btn-outline-info">Search</button>
+</form>
+</center>
+<br><br>
+<center>
+	{% if search_results %}
+		<h5>{{ search_results.count }} result(s) found</h5>
+	{%endif%}
+</center>
+
+<div class="container">
+{% for result in search_results %}
+	<div class="row" style="margin-bottom:20px;">
+    <div class="col border border-dark">
+      {{result.username}}
+    </div>
+	<div class="col border border-dark">
+      <a href = "accountdetails/{{result.id}}" class="btn btn-link">View Account</a>
+    </div>
+
+  </div>
+
+  
+  {% endfor %}
+</div>
+
+	
+
+
+
+{% endblock %}

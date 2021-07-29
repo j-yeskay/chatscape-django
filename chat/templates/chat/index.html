@@ -1,0 +1,40 @@
+{%  extends 'chat/base.html' %}
+
+
+
+
+{% block content %}
+	<title>ChatScape</title>
+	<center>
+	<br><br><br>
+	<h6>WELCOME TO</h6>
+	<br>
+	<h1 class="text text-warning"><u>ChatScape</u></h1>
+	<br><br>
+	<div class="container">
+		<div class="row">
+			<div class="col border-end border-warning">
+				New User?
+				<div class ="block">
+					Then <b>Register</b> Here
+				</div> 
+				<br><br>
+				<div class ="block">
+					<a href="{% url 'register' %}" class="btn btn-success">Register</a>
+				</div> 
+				
+			</div>
+			<div class="col">
+				Already Have an account?
+				<div class ="block">
+					Then <b>Login</b> Here
+				</div> 
+				<br><br>
+				<div class ="block">
+					<a href="{% url 'login' %}" class="btn btn-primary">Login</a>
+				</div> 
+			</div>
+		</div>
+	</div>
+	</center>
+{% endblock %}

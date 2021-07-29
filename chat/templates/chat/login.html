@@ -1,0 +1,32 @@
+{% extends 'chat/base.html' %}
+
+{% block content %}
+	<title>Login</title>
+	<center>
+	<h1>Login to <a href="{% url 'index' %}" class="text text-warning"> ChatScape </a></h1>
+	<hr>
+	<br><br><br>
+	{% for message in messages %}
+			{% if message.level_tag == 'success'%}
+			<div class="alert alert-primary" role="alert">
+  							{{ message }}
+			</div>
+			{% else %}
+				<div class="alert alert-danger" role="alert">
+  							{{ message }}
+			</div>
+			{% endif %}
+	{% endfor %}
+	<div class="card" style="width:500px;">
+	<form method = 'POST' class = "form-group">
+	{% csrf_token %}
+		<input type="text" name="username" class="form-control" placeholder="Username" autofocus autocapitalize="none" autocomplete="username" maxlength="255" required id="id_username" style="margin-bottom:5px;">
+		<input type="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" required id="id_password" style="margin-bottom:5px;">
+		<button class="btn btn-primary" style="margin-bottom:5px;">Login</button>
+		{{ form.errors }}
+	</form>
+	Didn't Have a ChatScape account? <a href="{% url 'register'%}" style="margin-bottom:5px;">Register now</a>
+	</div>
+	</center>
+
+{% endblock %}
