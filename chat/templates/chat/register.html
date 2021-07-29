@@ -8,6 +8,7 @@
 				color:red;
 			}
 	</style>
+	<body>
 	<center>
 	<h1>Register Now on <a href="{% url 'index' %}" class="text text-warning"> ChatScape </a></h1>
 	<hr>
@@ -21,39 +22,13 @@
 		<input type="text" name="date_of_birth" class="form-control" placeholder="Date of Birth" required id="id_date_of_birth" style="margin-bottom:5px;" onfocus="(this.type='date')">
 		<input type="password" name="password1" class="form-control" placeholder="Password" autocomplete="new-password" required id="id_password1" style="margin-bottom:5px;"> 
 		<input type="password" name="password2" class="form-control" placeholder="Password Confirmation" autocomplete="new-password" required id="id_password2" style="margin-bottom:5px;">
-		<small>Enter Correct Captcha to Submit</small>
-		<label for="captcha"  style = "background-color:black; color:white; display:block;" id="captchalabel"></label>
-		<input type="text" id="captcha" name="captcha" class="form-control" placeholder="captcha" onkeyup="checkCaptcha()" required>
-		<button class="btn btn-success" style="margin-bottom:5px; margin-top:5px;" id="register-button" disabled>Register</button>
+	    <button class="btn btn-success" style="margin-bottom:5px; margin-top:5px;" id="register-button">Register</button>
 		
 		{{ form.errors }}
 		
 	</form>
 	Already Have a ChatScape account? <a href="{% url 'login'%}" style="margin-bottom:5px;">Login now</a>
-
 	</div>
 	</center>
-
-	<script>
-		
-		let num1 = Math.floor(Math.random() * 10);
-		let num2 = Math.floor(Math.random() * 10);
-		let captchaLabel = document.querySelector("#captchalabel");
-		captchaLabel.innerHTML = num1.toString() + ' + ' +  num2.toString();
-		let sumOfNums = num1 + num2; 
-		sumOfNums = sumOfNums.toString(); 
-		let registerButton = document.querySelector("#register-button");
-		let captchaInputBox = document.querySelector("#captcha");
-		function checkCaptcha(){
-				if (captchaInputBox.value == sumOfNums){
-					registerButton.disabled = false;
-				}
-		} 
-		
-
-		
-		
-	</script>
-	
-
+	</body>
 {% endblock %}
