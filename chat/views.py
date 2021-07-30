@@ -9,7 +9,7 @@ from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
 from . models import Account, Message
 from . msgs import SuccessMessageMixin
-import json
+
 
 
 
@@ -98,10 +98,7 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 def ChatView(request):
 	old_messages = Message.objects.all()
 	return render(request, 'chat/chat.html', {
-		# 'username': (json.dumps(request.user.username)),
 		'username': request.user.username,
 		'old_messages': old_messages
 	})
-	# return render(request, 'chat/chat.html', {
-	# 	'username': request.user.username
-	# })
+	

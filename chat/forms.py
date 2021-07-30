@@ -11,9 +11,6 @@ class UserRegistrationForm(UserCreationForm):
 	email = forms.EmailField(max_length = 255)
 	date_of_birth = forms.DateField()
 	
-	
-	
-
 	class Meta:
 		model = Account
 		fields = ('username', 'firstname', 'lastname', 'email', 'date_of_birth', 'password1', 'password2')
