@@ -78,7 +78,7 @@ class Account(AbstractBaseUser):
 		return True
 
 
-class Message(models.Model):
+class PublicMessage(models.Model):
     username = models.CharField(max_length=255)
     content = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)

@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.views import generic
 from django.urls import reverse_lazy
 from django.contrib.auth.views import PasswordChangeView
-from . models import Account, Message
+from . models import Account, PublicMessage
 from . msgs import SuccessMessageMixin
 
 
@@ -96,7 +96,7 @@ class ChangePasswordView(SuccessMessageMixin, PasswordChangeView):
 
 @login_required(login_url = "index")
 def ChatView(request):
-	old_messages = Message.objects.all()
+	old_messages = PublicMessage.objects.all()
 	return render(request, 'chat/chat.html', {
 		'username': request.user.username,
 		'old_messages': old_messages
