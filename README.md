@@ -71,8 +71,10 @@ Start a redis server on port 6379 using docker by (in the command line).
 
 ``docker run -p 6379:6379 -d redis:5``
 
-You can also use the **in-memory channel layer** that comes packaged with django channels.
-**NOTE :(if you use the in-memory channel)**
+You can also use the **in-memory channel layer** that comes packaged with django channels.  
+
+##### NOTE : (if you use the in-memory channel)  
+
 change the following code in **settings . py** file.
 
 **FROM THIS**
