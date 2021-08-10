@@ -5,19 +5,19 @@
 ___
 This project is built using **django** and **websockets**. [django channels](https://github.com/django/channels) is used to handle websockets.
 
-### How to setup?
+## How to setup?
 
 Navigate to the directory where you want to store the project and open command line there.
 
 Now from the command line,
 
-##### STEP 0 (clone the repo)
+#### STEP 0 (clone the repo)
 ```
 git clone https://github.com/j-yeskay/chatscape-django.git
 cd chatscape-django
 ```
 
-##### STEP 1 (create a venv virtual environment)
+#### STEP 1 (create a venv virtual environment)
 ``python -m venv virt``
 
 Activate the virtual environment by
@@ -28,10 +28,10 @@ Activate the virtual environment by
 **For Mac**
 ``source virt/bin/activate``
 
-##### STEP 2 (install the dependencies)
+#### STEP 2 (install the dependencies)
 ``pip install -r requirements.txt``
 
-##### STEP 3 (create SECRET_KEY and set DEBUG = True in settings . py )
+#### STEP 3 (create SECRET_KEY and set DEBUG = True in settings . py )
 
 Now in the command prompt
 Type **python** and hit enter.
@@ -55,7 +55,7 @@ Change the code
 **TO THIS**
 ``DEBUG = True``
 
-##### STEP 4 (specify a channel layer)
+#### STEP 4 (specify a channel layer)
 
 I have used **redis** as a backing store for the channel layer for this project. **(i recommend using docker  for redis).**
 Start a redis server on port 6379 using docker by
@@ -85,13 +85,13 @@ CHANNEL_LAYERS = {
 }
 ```
 
-##### STEP 5 (run the migrations)
+#### STEP 5 (run the migrations)
 ```
 python manage.py makemigrations
 python manage.py migrate
 ```
 
-##### STEP 6 (run the app)
+#### STEP 6 (run the app)
 ```
 python manage.py runserver
 ```
