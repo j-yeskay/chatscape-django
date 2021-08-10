@@ -33,7 +33,7 @@ Activate the virtual environment by
 
 #### STEP 3 (create SECRET_KEY and set DEBUG = True in settings . py )
 
-Now in the command prompt
+Now in the command line
 Type **python** and hit enter.
 ```
 >>>import secrets
@@ -44,21 +44,30 @@ Copy the generated secret key and in the **settings . py** file
 Change the code
 
 **FROM THIS**
-``SECRET_KEY = config('SECRET_KEY')``
+```
+SECRET_KEY = config('SECRET_KEY')
+```
 
 **TO THIS**
-``SECRET_KEY = < paste the generated secret key here>``
+```
+SECRET_KEY = < paste the generated secret key here>
+```
 
 **AND FROM THIS**
-``DEBUG = config('DEBUG', cast=bool, default = True)``
+```
+DEBUG = config('DEBUG', cast=bool, default = True)
+```
 
 **TO THIS**
-``DEBUG = True``
+```
+DEBUG = True
+```
 
 #### STEP 4 (specify a channel layer)
 
-I have used **redis** as a backing store for the channel layer for this project. **(i recommend using docker  for redis).**
-Start a redis server on port 6379 using docker by
+I have used **redis** as a backing store for the channel layer for this project. 
+**(i recommend using docker  for redis).**
+Start a redis server on port 6379 using docker by (in the command line).
 ``docker run -p 6379:6379 -d redis:5``
 
 You can also use the **in-memory channel layer** that comes packaged with django channels.
