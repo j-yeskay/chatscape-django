@@ -67,7 +67,8 @@ DEBUG = True
 
 I have used **redis** as a backing store for the channel layer for this project. 
 **(i recommend using docker  for redis).**
-Start a redis server on port 6379 using docker by (in the command line).
+Start a redis server on port 6379 using docker by (in the command line).  
+
 ``docker run -p 6379:6379 -d redis:5``
 
 You can also use the **in-memory channel layer** that comes packaged with django channels.
