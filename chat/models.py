@@ -55,6 +55,8 @@ class Account(AbstractBaseUser):
 	email = models.EmailField(verbose_name = "email", max_length = 255, unique = True)
 	date_of_birth = models.DateField()
 
+	friends = models.ManyToManyField('Account',blank=True)
+
 	date_joined = models.DateTimeField(verbose_name = "date_joined", auto_now_add = True)
 	last_login = models.DateTimeField(verbose_name = "last_login", auto_now = True)
 
@@ -76,6 +78,18 @@ class Account(AbstractBaseUser):
 	
 	def has_module_perms(self, app_label):
 		return True
+
+
+class FriendRequest(models.Model):
+	sender_account = models.ForeignKey(Account, related_name="sender_account", on_delete=models.CASCADE)
+	receiver_account = models.ForeignKey(Account, related_name="receiver_account", on_delete=models.CASCADE)
+
+
+	def __str__(self):
+		return (f'{self.sender_account.username} to {self.receiver_account}')
+
+
+
 
 
 class PublicMessage(models.Model):

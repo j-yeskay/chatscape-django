@@ -4,12 +4,24 @@
 {% block content %}
 <title>Account Details</title>
 	
-<br><br><br>
+<br><br>
+{% for message in messages %}
+			{% if message.level_tag == 'success'%}
+			<div class="alert alert-primary" role="alert">
+  							{{ message }}
+			</div>
+			{% else %}
+				<div class="alert alert-warning" role="alert">
+  							{{ message }}
+			</div>
+			{% endif %}
+{% endfor %}
+
 <center>
 {% for detail in accountdetail %}
 	<h4>{{detail.username}}'s details</h4>
 {% endfor %}
-<br><br><br>
+<br><br>
 <center>
 <div class="container">
 	{% for detail in accountdetail %}
@@ -54,6 +66,25 @@
     			</div>
     		</div>
 	{% endfor %}
+	{% if already_friend %}
+		<a href="/myfriends/unfriend/{{friendid}}" class="btn btn-danger">Unfriend</a>
+	{% elif already_got_friend_request %}
+		<a href="/myrequests/acceptfriendrequest/{{requestid}}" class="btn btn-success">
+				{% for detail in accountdetail %}
+					{{detail.username}} has already sent you a friend request! Click here to accept it.
+				{% endfor %}
+		</a>
+	{% else %}
+		<a href="sendfriendrequest/" class="btn btn-primary">Send Friend Request</a>
+	{% endif %}
 </div>
 </center>
+
+<script>
+	if({{no_of_friend_requests}} != 0){
+		document.getElementById('no_of_friend_requests').innerHTML = {{no_of_friend_requests}};
+	}
+</script>
+
+
 {% endblock %}

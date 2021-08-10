@@ -34,8 +34,11 @@
   {% endfor %}
 </div>
 
-	
-
+<script>
+	if({{no_of_friend_requests}} != 0){
+		document.getElementById('no_of_friend_requests').innerHTML = {{no_of_friend_requests}};
+	}
+</script>
 
 
 {% endblock %}

@@ -26,6 +26,14 @@
           <a class="nav-link active" aria-current="page" href="{% url 'find' %}" style="margin-right:40px;">Find People</a>
         </li>
 		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'myfriends' %}" style="margin-right:40px;">My Friends</a>
+        </li>
+		<li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="{% url 'myrequests' %}" style="margin-right:40px;">My Requests
+		  			<span class="badge bg-danger" id="no_of_friend_requests"></span>
+		  </a>
+		</li>
+		<li class="nav-item">
           <a class="btn btn-outline-warning nav-link active" aria-current="page" href="{% url 'chat' %}" style="margin-right:40px;">Chat</a>
         </li>
 		<li class="nav-item">
