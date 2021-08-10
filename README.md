@@ -22,10 +22,12 @@ cd chatscape-django
 
 Activate the virtual environment by
 
-**For Windows on cmd**
+**For Windows on cmd**  
+
 ``virt\Scripts\activate``
 
-**For Mac**
+**For Mac**  
+
 ``source virt/bin/activate``
 
 #### STEP 2 (install the dependencies)
