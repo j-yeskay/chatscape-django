@@ -17,6 +17,9 @@ git clone https://github.com/j-yeskay/chatscape-django.git
 cd chatscape-django
 ```
 
+##### NOTE : USE *PYTHON 3.9.X*  
+
+
 #### STEP 1 (create a venv virtual environment)
 ``python -m venv virt``
 
@@ -42,7 +45,7 @@ Type **python** and hit enter.
 >>>secrets.token_hex(24)
 <a secret key will be generated>
 ```
-Copy the generated secret key and in the **settings . py** file
+Copy the generated secret key and in the **settings . py** file  
 Change the code
 
 **FROM THIS**
