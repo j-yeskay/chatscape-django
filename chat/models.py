@@ -45,9 +45,6 @@ class AccountManager(BaseUserManager):
 		
 		
 
-
-
-
 class Account(AbstractBaseUser):
 	username = models.CharField(verbose_name = "username", max_length = 255, unique = True)
 	firstname = models.CharField(verbose_name = "firstname", max_length = 255)
@@ -89,11 +86,8 @@ class FriendRequest(models.Model):
 		return (f'{self.sender_account.username} to {self.receiver_account}')
 
 
-
-
-
 class PublicMessage(models.Model):
-    username = models.CharField(max_length=255)
+    sender = models.CharField(max_length=255)
     content = models.TextField()
     date_added = models.DateTimeField(auto_now_add=True)
 
