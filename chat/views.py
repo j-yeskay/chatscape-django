@@ -191,9 +191,9 @@ def UnfriendView(request, pk):
 
 
 @login_required(login_url = "index")
-def ChatView(request):
+def PublicChatView(request):
 	old_messages = PublicMessage.objects.all()
-	return render(request, 'chat/chat.html', {
+	return render(request, 'chat/publicchat.html', {
 		'no_of_friend_requests': get_no_of_friend_requests(request),
 		'username': request.user.username,
 		'old_messages': old_messages
