@@ -87,9 +87,11 @@ class FriendRequest(models.Model):
 
 
 class PublicMessage(models.Model):
-    sender = models.CharField(max_length=255)
-    content = models.TextField()
-    date_added = models.DateTimeField(auto_now_add=True)
+	sender = models.CharField(max_length=255)
+	content = models.TextField()
+	date_added = models.DateTimeField(auto_now_add=True)
 
-    class Meta:
-        ordering = ('date_added',)
+	class Meta:
+		ordering = ('date_added',)
+
+
