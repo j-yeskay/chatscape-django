@@ -80,7 +80,7 @@ def FindView(request):
             username__istartswith=q)
         return render(request, 'chat/find.html', {'no_of_friend_requests': get_no_of_friend_requests(request), 'search_results': search_results})
     else:
-        return render(request, 'chat/find.html', {'no_of_friend_requests': get_no_of_friend_requests(request)})
+        return render(request, 'chat/find.html', {'no_of_friend_requests': get_no_of_friend_requests(request), 'all_except_current_user': all_except_current_user})
 
 
 @login_required(login_url='index')

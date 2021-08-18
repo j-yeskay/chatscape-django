@@ -31,7 +31,20 @@
   </div>
 
   
-  {% endfor %}
+{% endfor %}
+{% for account in all_except_current_user %}
+	<div class="row" style="margin-bottom:20px;">
+    <div class="col border border-dark">
+      {{account.username}}
+    </div>
+	<div class="col border border-dark">
+      <a href = "accountdetails/{{account.id}}" class="btn btn-link">View Account</a>
+    </div>
+
+  </div>
+
+  
+{% endfor %}
 </div>
 
 <script>
