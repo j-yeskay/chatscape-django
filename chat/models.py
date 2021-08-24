@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.db.models.expressions import OrderBy
 
 
 class AccountManager(BaseUserManager):
@@ -86,12 +87,20 @@ class FriendRequest(models.Model):
 		return (f'{self.sender_account.username} to {self.receiver_account}')
 
 
+# class PublicMessage(models.Model):
+# 	sender = models.CharField(max_length=255)
+# 	content = models.TextField()
+# 	date_added = models.DateTimeField(auto_now_add=True)
+
+# 	class Meta:
+# 		ordering = ('date_added',)
+
+
 class PublicMessage(models.Model):
-	sender = models.CharField(max_length=255)
-	content = models.TextField()
-	date_added = models.DateTimeField(auto_now_add=True)
+	sender = models.ForeignKey(Account, on_delete = models.CASCADE)
+	message_content = models.TextField(blank = False, null = False)
+	date_added = models.DateTimeField(auto_now_add = True)
+
 
 	class Meta:
-		ordering = ('date_added',)
-
-
+		ordering = ['date_added']
