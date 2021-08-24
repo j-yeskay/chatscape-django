@@ -36,8 +36,12 @@
 				chatSocket.onmessage = function(e){
 					const data = JSON.parse(e.data);
 						if(data.message_content){
-							const sender_username = data.sender_username.replace(/"/g,"")
-							document.querySelector('#chat-log').innerHTML += ('<b>' + sender_username + '</b>: ' + data.message_content + '<br>');
+							if (!data.message_content.replace(/\s/g, "").length) {
+								alert("Message cannot be empty!");
+							}else{
+								const sender_username = data.sender_username.replace(/"/g,"")
+								document.querySelector('#chat-log').innerHTML += ('<b>' + sender_username + '</b>: ' + data.message_content + '<br>');
+							}
 						}
 						goToBottom();
 				};
@@ -54,8 +58,8 @@
 				document.querySelector('#chat-message-submit').onclick = function(e) {
 					const messageInputDom = document.querySelector('#chat-message-input');
 					const message = messageInputDom.value;
-					if (message != ""){
-
+					
+				if (!!message.replace(/\s/g, "").length) {
 					chatSocket.send(JSON.stringify({
 						'sender_username': userName,
 						'message_content': message
