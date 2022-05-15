@@ -38,6 +38,7 @@ INSTALLED_APPS = [
 
 	# My Apps
 	'chat',
+    'members',
 ]
 
 MIDDLEWARE = [
@@ -126,7 +127,7 @@ STATIC_URL = '/static/'
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 
-AUTH_USER_MODEL = 'chat.Account'
+AUTH_USER_MODEL = 'members.Account'
 
 ASGI_APPLICATION = 'chatscape.asgi.application'
 

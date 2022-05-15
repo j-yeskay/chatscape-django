@@ -23,7 +23,21 @@
 		<input type="text" name="username" class="form-control" placeholder="Username" autofocus autocapitalize="none" autocomplete="username" maxlength="255" required id="id_username" style="margin-bottom:5px;">
 		<input type="password" name="password" class="form-control" placeholder="Password" autocomplete="current-password" required id="id_password" style="margin-bottom:5px;">
 		<button class="btn btn-primary" style="margin-bottom:5px;">Login</button>
-		{{ form.errors }}
+		
+		{% if form.errors %}
+    		<ul class="user-msg error">
+    		{% for field in form %}
+        		{% for error in field.errors %}
+	            	<li>
+              		{% if field != '__all__' %}
+                		<strong>{{ field.label }}:</strong>
+              		{% endif %}
+              		{{ error }}
+            		</li>
+        		{% endfor %}
+    		{% endfor %}
+    		</ul>
+		{% endif %}
 	</form>
 	Didn't Have a ChatScape account? <a href="{% url 'register'%}" style="margin-bottom:5px;">Register now</a>
 	</div>

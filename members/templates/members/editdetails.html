@@ -16,7 +16,20 @@
 	{% csrf_token %}
 	{{ form.as_p }}
 	<button type = "submit" class="btn btn-success" style="margin-bottom:10px;">Submit</button>
-	
+	{% if form.errors %}
+    	<ul class="user-msg error">
+    	{% for field in form %}
+        	{% for error in field.errors %}
+            	<li>
+              	{% if field != '__all__' %}
+                	<strong>{{ field.label }}:</strong>
+              	{% endif %}
+              	{{ error }}
+            	</li>
+        	{% endfor %}
+    	{% endfor %}
+    	</ul>
+	{% endif %}
 </form>
 </div>
 </center>
