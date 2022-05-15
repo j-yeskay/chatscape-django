@@ -1,7 +1,8 @@
 from django.shortcuts import render, redirect
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
-from . models import Account, PublicMessage, FriendRequest
+from members.models import Account
+from . models import PrivateMessage, PublicMessage, FriendRequest, PrivateChatRoom
 
 
 def get_no_of_friend_requests(req):
@@ -95,8 +96,41 @@ def MyRequestsView(request):
 def MyFriendsView(request):
     current_account = Account.objects.get(username=request.user)
     my_friends = current_account.friends.all()
+    private_chatroom_ids = {}
+
+    for friend in my_friends:
+        room_id = get_private_chatroom(request.user, friend)
+        private_chatroom_ids[str(room_id)] = room_id
+    
+    friends_and_chatrooms = zip(list(my_friends), list(private_chatroom_ids))
+
     no_of_friends = len(my_friends)
-    return render(request, 'chat/myfriends.html', {'no_of_friend_requests': get_no_of_friend_requests(request), 'my_friends': my_friends, 'no_of_friends': no_of_friends})
+    return render(request, 'chat/myfriends.html', {'no_of_friend_requests': get_no_of_friend_requests(request), 'my_friends': my_friends, 'no_of_friends': no_of_friends, 'friends_and_chatrooms' : friends_and_chatrooms})
+
+
+def get_private_chatroom(account1, account2):
+    try:
+        chat_room = PrivateChatRoom.objects.get(account1 = account1, account2 = account2)
+    except PrivateChatRoom.DoesNotExist:
+        chat_room = PrivateChatRoom.objects.get(account1 = account2, account2 = account1)
+
+    return chat_room.id
+
+
+def create_private_chatroom(account1, account2):
+    chatroom = PrivateChatRoom(account1 = account1, account2 = account2)
+    chatroom.save()
+
+
+def delete_private_chatroom(account1, account2):
+    try:
+        chat_room = PrivateChatRoom.objects.get(account1 = account1, account2 = account2)
+        chat_room.delete()
+    except PrivateChatRoom.DoesNotExist:
+        chat_room = PrivateChatRoom.objects.get(account1 = account2, account2 = account1)
+        chat_room.delete()
+    
+
 
 
 @login_required(login_url="index")
@@ -108,6 +142,8 @@ def AcceptFriendRequestView(request, pk):
             friend_request.sender_account)
         friend_request.sender_account.friends.add(
             friend_request.receiver_account)
+
+        create_private_chatroom(friend_request.sender_account, friend_request.receiver_account)
 
         friend_request.delete()
         messages.success(request, "Friend Request Accepted!")
@@ -122,6 +158,9 @@ def UnfriendView(request, pk):
     friend_account = Account.objects.get(id=pk)
     current_account.friends.remove(friend_account)
     friend_account.friends.remove(current_account)
+
+    delete_private_chatroom(current_account, friend_account)
+    
     messages.error(request, "Friend Removed!")
     return redirect('myfriends')
 
@@ -133,4 +172,17 @@ def PublicChatView(request):
         'no_of_friend_requests': get_no_of_friend_requests(request),
         'username': request.user.username,
         'old_messages': old_messages
+    })
+
+
+@login_required(login_url="index")
+def PrivateChatView(request, pk):
+    chat_room = PrivateChatRoom.objects.get(id = pk)
+    private_messages = PrivateMessage.objects.filter(chat_room = chat_room)
+    
+    return render(request, 'chat/privatechat.html', {
+        'no_of_friend_requests': get_no_of_friend_requests(request),
+        'username' : request.user.username,
+        'chat_room' : chat_room,
+        'private_messages' : private_messages,
     })

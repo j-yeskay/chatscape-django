@@ -6,33 +6,36 @@
 <title>My Friends</title>
 <br><br><br>
 {% for message in messages %}
-		<div class="alert alert-danger" role="alert">
-  							{{ message }}
-		</div>
+        <div class="alert alert-danger" role="alert">
+                              {{ message }}
+        </div>
 {% endfor %}
 
 <center>
-	<h4>My Friends</h4>
-	<br>
-		<h6>You Have {{ no_of_friends }} friends.</h6>
-	<br>
-	{% for friend in my_friends %}
-		
-		<div class="row" style="margin-bottom:20px;">
-   			<div class="col">
-      				<a href="../find/accountdetails/{{friend.id}}">{{friend.username}}</a>
-    		</div>
-			<div class="col">
-      				<a href="../myfriends/unfriend/{{friend.id}}" class="btn btn-danger">Unfriend</a>
-    		</div>
+    <h4>My Friends</h4>
+    <br>
+        <h6>You Have {{ no_of_friends }} friends.</h6>
+    <br>
+    {% for friend, chatroom in friends_and_chatrooms %}
+        
+        <div class="row" style="margin-bottom:20px;">
+               <div class="col">
+                      <a href="../find/accountdetails/{{friend.id}}">{{friend.username}}</a>
+            </div>
+            <div class="col">
+                <a href="../privatechat/{{ chatroom }}/" class = "btn btn-warning">Chat</a>
+            </div>
+            <div class="col">
+                      <a href="../myfriends/unfriend/{{friend.id}}/" class="btn btn-danger">Unfriend</a>
+            </div>
 
-  		</div>
-		  <hr>
-	{% endfor %}
+          </div>
+          <hr>
+    {% endfor %}
 <br><br><br>
 <script>
-	if({{no_of_friend_requests}} != 0){
-		document.getElementById('no_of_friend_requests').innerHTML = {{no_of_friend_requests}};
-	}</script>
+    if({{no_of_friend_requests}} != 0){
+        document.getElementById('no_of_friend_requests').innerHTML = {{no_of_friend_requests}};
+    }</script>
 
 {% endblock %}
